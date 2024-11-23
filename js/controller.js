@@ -1869,9 +1869,6 @@
                 }
                 jUl.trigger('update');
             });
-
-
-
         }
         function __promptCheck(jNode, scale){
             let id      = jNode.attr('id');
@@ -2457,49 +2454,50 @@
             if(match.length>0){
                 // Update bonus
                 __inputs["skill_adv_"+index+"_bonus"].value = 0;
-                switch(match[0].id){
-                    case 'lire':
-                        __inputs["skill_adv_"+index+"_bonus"].value += __hasTalent("Linguistique") ? 10 : 0;
+                switch(name){
+                    case 'Lire/écrire':
+                        __inputs["skill_adv_"+index+"_bonus"].value += (__hasTalent("Linguistique") ? 10 : 0);
+                    break; 
+                    case 'Langue (bretonnien)':
+                    case 'Langue (classique)':
+                    case 'Langue (eltharin)':
+                    case 'Langue (estalien)':
+                    case 'Langue (gobelinoïde)':
+                    case 'Langue (grumbarth)':
+                    case 'Langue (halfling)':
+                    case 'Langue (khazalid)':
+                    case 'Langue (kislevien)':
+                    case 'Langue (langage sombre)':
+                    case 'Langue (norse)':
+                    case 'Langue (reikspiel)':
+                    case 'Langue (tiléen)':
+                        __inputs["skill_adv_"+index+"_bonus"].value += (__hasTalent("Linguistique") ? 10 : 0) + (__hasTalent("Grand voyageur") ? 10 : 0);
                     break;
-                    case 'lg_0':
-                    case 'lg_1':
-                    case 'lg_2':
-                    case 'lg_3':
-                    case 'lg_4':
-                    case 'lg_5':
-                    case 'lg_6':
-                    case 'lg_7':
-                    case 'lg_8':
-                    case 'lg_9':
-                    case 'lg_10':
-                    case 'lg_11':
-                    case 'lg_12':
-                        __inputs["skill_adv_"+index+"_bonus"].value += __hasTalent("Linguistique") ? 10 : 0;
-                    case 'gc_1':
-                    case 'gc_2':
-                    case 'gc_3':
-                    case 'gc_4':
-                    case 'gc_5':
-                    case 'gc_6':
-                    case 'gc_7':
-                    case 'gc_8':
-                    case 'gc_9':
-                    case 'gc_10':
-                    case 'gc_11':
-                    case 'gc_12':
+                    case 'Con. générales (bretonne)':
+                    case 'Con. générales (elfes)':
+                    case 'Con. générales (empire)':
+                    case 'Con. générales (estalie)':
+                    case 'Con. générales (halfeling)':
+                    case 'Con. générales (kislev)':
+                    case 'Con. générales (nains)':
+                    case 'Con. générales (norsca)':
+                    case 'Con. générales (ogres)':
+                    case 'Con. générales (pays perdu)':
+                    case 'Con. générales (frontalières)':
+                    case 'Con. générales (tilée)':
                         __inputs["skill_adv_"+index+"_bonus"].value += __hasTalent("Grand voyageur") ? 10 : 0;
                     break;
-                    case "orientation":
+                    case "Orientation":
                         __inputs["skill_adv_"+index+"_bonus"].value += __hasTalent("Sens de l'orientation") ? 10 : 0;
                     break;
-                    case "focalisation":
-                    case "smagie":
+                    case "Focalisation":
+                    case "Sens de la magie":
                         __inputs["skill_adv_"+index+"_bonus"].value += __hasTalent("Harmonie aethyrique") ? 10 : 0;
                     break;
-                    case "torture":
+                    case "Torture":
                         __inputs["skill_adv_"+index+"_bonus"].value += __hasTalent("Menaçant") ? 10 : 0;
                     break;
-                    case "job_3":
+                    case "Métier (artiste)":
                         __inputs["skill_adv_"+index+"_bonus"].value += __hasTalent("Talent artistique") ? 20 : 0;
                     break;
                 }
@@ -2605,8 +2603,8 @@
                 __updateSkill('intimidation', 13); // "Menaçant"
                 __updateSkill('perception', 17); // "Sens aiguisés"
 
-                // "Grand voyageur", "Linguistique", "Menaçant", "Sens de l'orientation"
-                for(i=1; i<=24; i++){
+                // "Grand voyageur", "Linguistique", "Menaçant", "Sens de l'orientation", "Harmonie aethyrique"
+                for(i=1; i<=74; i++){
                     if(typeof __inputs["skill_adv_"+i+"_name"] != 'undefined'){
                         __updateSkillAdv(__inputs["skill_adv_"+i+"_name"].value, i);
                     }

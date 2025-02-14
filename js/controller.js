@@ -2792,6 +2792,7 @@
                 try{
                     package = JSON.parse(window.atob(package));
                     data['character_name'] = package[0];
+                    document.title = package[0];
                     match = __resources.races.filter((v) => { return v.id==package[1]; });
                     if(match.length>0){ data['character_race'] = match[0].nom; }
                     if(package[2].length>0){

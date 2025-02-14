@@ -2581,27 +2581,29 @@
             return found;
         }
         function __updateTalent(name, index){
+            name = (name==null?'':name)
             let match = __resources.talents.filter((v) => { return v.name==name; });
             let i = 0;
+
             if(match.length>0){
                 __inputs["talent_"+index].value = name
                 __inputs["talent_"+index+"_desc"].value = match[0].desc;
 
-                __updateStat('cc'); // "Guerrier né"
-                __updateStat('ct'); // "Tireur d'élite"
-                __updateStat('f'); // "Force accrue"
-                __updateStat('b'); // "Dur à cuir"
-                __updateStat('e'); // "Résistance accrue"
-                __updateStat('ag'); // "Réflexes éclair"
-                __updateStat('int'); // "Intelligent"
-                __updateStat('fm'); // "Sang-froid"
-                __updateStat('soc'); // "Sociable"
-                __updateStat('m'); // "Course à pied"
-                __updateStat('pd'); // "Chance"
-                __updateSkill('evaluation', 11); // "Dur en affaires"
-                __updateSkill('marchandage', 15); // "Dur en affaires"
-                __updateSkill('intimidation', 13); // "Menaçant"
-                __updateSkill('perception', 17); // "Sens aiguisés"
+                __updateStat('cc');                 // "Guerrier né"
+                __updateStat('ct');                 // "Tireur d'élite"
+                __updateStat('f');                  // "Force accrue"
+                __updateStat('b');                  // "Dur à cuir"
+                __updateStat('e');                  // "Résistance accrue"
+                __updateStat('ag');                 // "Réflexes éclair"
+                __updateStat('int');                // "Intelligent"
+                __updateStat('fm');                 // "Sang-froid"
+                __updateStat('soc');                // "Sociable"
+                __updateStat('m');                  // "Course à pied"
+                __updateStat('pd');                 // "Chance"
+                __updateSkill('evaluation', 11);    // "Dur en affaires"
+                __updateSkill('marchandage', 15);   // "Dur en affaires"
+                __updateSkill('intimidation', 13);  // "Menaçant"
+                __updateSkill('perception', 17);    // "Sens aiguisés"
 
                 // "Grand voyageur", "Linguistique", "Menaçant", "Sens de l'orientation", "Harmonie aethyrique"
                 for(i=1; i<=74; i++){
@@ -2619,27 +2621,14 @@
             let i = 0;
             let list = [];
             for(i=1; i<=34; i++){
-                list.push({"name": __inputs["talent_"+i].value, "desc": __inputs["talent_"+i+"_desc"].value})
+                name = __inputs["talent_"+i].value ;
+                list.push({"name": __inputs["talent_"+i].value == null ? '' : name, "desc": __inputs["talent_"+i+"_desc"].value})
             }
-            list.sort((a, b) => {
-                if(a.name==''){
-                    if(b.name==''){
-                        return 0;
-                    } else {
-                        return 1
-                    }
-                } else {
-                    if(b.name==''){
-                        return -1;
-                    } else {
-                        if(a.name<b.name){
-                            return -1
-                        } else {
-                            return 1
-                        }
-                    }
-                }
-            });
+            list = list.filter((v) => { return v.name != ""})
+            list.sort((a, b) => { return a.name<b.name ? -1 : 1 })
+            while(list.length<34){
+                list.push({ "name": "", "desc": ""})
+            }
             list.forEach((v, i) => {
                 __inputs["talent_"+(i+1)].value = v.name;
                 __inputs["talent_"+(i+1)+"_desc"].value = v.desc;
